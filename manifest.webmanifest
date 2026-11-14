@@ -1,12 +1,21 @@
+
 {
   "name": "Le Mode TV Magazine",
   "short_name": "Le Mode TV",
-  "description": "Moda, belleza, noticias y entretenimiento.",
+  "description": "Moda, belleza, noticias y entretenimiento",
   "lang": "es",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f5f4f1",
   "theme_color": "#080808",
-  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+  "icons": [
+    {
+      "src": "./favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }
+
