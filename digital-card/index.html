@@ -59,7 +59,7 @@ h1{font: bold clamp(32px,5vw,48px)/1.05 Georgia,serif;text-align:center;margin:1
       <a class="btn" href="https://wa.me/14075358878" target="_blank" rel="noopener"><span class="ico">◉</span><span><strong>WhatsApp</strong><small>+1 407-535-8878</small></span></a>
       <a class="btn" href="mailto:lemodetvmagazine@gmail.com"><span class="ico">✉</span><span><strong>Correo electrónico</strong><small>lemodetvmagazine@gmail.com</small></span></a>
       <a class="btn" href="https://lemodetvmagazine.online" target="_blank" rel="noopener"><span class="ico">◎</span><span><strong>Sitio web</strong><small>lemodetvmagazine.online</small></span></a>
-      <a class="btn" href="#" id="saveContact"><span class="ico">＋</span><span><strong>Guardar contacto</strong><small>Descargar contacto al teléfono</small></span></a>
+      <a class="btn" href="Nancy-Cuebas.vcf"><span class="ico">＋</span><span><strong>Guardar contacto</strong><small>Añadir contacto al teléfono</small></span></a>
     </div>
     <div class="qrbox">
       <img id="qr" alt="Código QR que abrirá esta tarjeta cuando esté publicada">
@@ -74,27 +74,10 @@ h1{font: bold clamp(32px,5vw,48px)/1.05 Georgia,serif;text-align:center;margin:1
 <p class="note">Para que el código QR abra esta tarjeta, primero publica este archivo en una dirección web pública. El QR se actualizará automáticamente con la dirección de esta página.</p>
 </main>
 <script>
-const currentPage = 'https://lemodetvmagazine.github.io/le-mode-tv-magazine2/digital-card/';
+const currentPage = window.location.href;
 document.getElementById('qr').src =
   'https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=8&data=' + encodeURIComponent(currentPage);
-document.getElementById('saveContact').addEventListener('click', function(e){
-  e.preventDefault();
-  const vcard = [
-    'BEGIN:VCARD','VERSION:3.0',
-    'N:Cuebas Mateo;Nancy Ivette;;;',
-    'FN:Nancy Ivette Cuebas Mateo',
-    'ORG:Le Mode TV Magazine',
-    'TITLE:Editora | Empresaria Digital',
-    'TEL;TYPE=CELL:+14075358878',
-    'EMAIL:lemodetvmagazine@gmail.com',
-    'URL:https://lemodetvmagazine.online',
-    'END:VCARD'
-  ].join('\\r\\n');
-  const blob = new Blob([vcard], {type:'text/vcard;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href=url; a.download='Nancy-Cuebas.vcf';
-  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-});
+
 </script>
 </body>
 </html>
