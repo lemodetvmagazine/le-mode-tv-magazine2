@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Le Mode Trivia</title>
+<style>
+body{margin:0;background:#111;color:#fff;font-family:Arial;text-align:center;padding:20px}
+header{color:#dfbd75;font-family:Georgia;font-size:30px;letter-spacing:3px;margin:25px 0}
+h2{color:#dfbd75}
+.card{background:#222;border:1px solid #b18b49;border-radius:16px;padding:22px;max-width:500px;margin:20px auto}
+button{display:block;width:100%;padding:14px;margin:10px 0;border-radius:10px;border:1px solid #c6a35e;background:#292929;color:white;font-size:16px}
+button:active{background:#80612d}
+#next{background:#d7b56d;color:#111;font-weight:bold}
+small{color:#d7b56d}
+</style>
+</head>
+<body>
+<header>LE MODE TV</header>
+<small>CELEBRITY TRIVIA · VOL. 1</small>
+<div class="card">
+<h2>¿Cuánto sabes del entretenimiento?</h2>
+<p id="count"></p>
+<h3 id="question"></h3>
+<div id="answers"></div>
+<p id="feedback"></p>
+<button id="next" onclick="next()" disabled>SIGUIENTE</button>
+<h2 id="result"></h2>
+</div>
+<script>
+const data=[
+["¿Quién lanzó Thriller?",["Prince","Michael Jackson","Elton John","Bruno Mars"],1],
+["¿Quién protagonizó Titanic?",["Brad Pitt","Tom Cruise","Leonardo DiCaprio","Matt Damon"],2],
+["¿Quién lanzó Un Verano Sin Ti?",["Daddy Yankee","Bad Bunny","Ozuna","Ricky Martin"],1],
+["¿Cómo se llama la protagonista de Wednesday?",["Morticia","Enid","Wednesday","Bianca"],2],
+["¿Qué película presenta a Elsa?",["Moana","Frozen","Encanto","Brave"],1],
+["¿Quién canta Like a Prayer?",["Madonna","Cher","Rihanna","Adele"],0],
+["¿Quién interpreta a Iron Man?",["Chris Evans","Chris Hemsworth","Robert Downey Jr.","Mark Ruffalo"],2],
+["¿Qué grupo canta Bohemian Rhapsody?",["The Beatles","Queen","Coldplay","ABBA"],1],
+["¿En qué ciudad viven los personajes de Friends?",["Miami","Chicago","Nueva York","Boston"],2],
+["¿Quién lanzó el álbum 1989?",["Taylor Swift","Ariana Grande","Dua Lipa","Katy Perry"],0],
+["¿Quién es Jack Sparrow?",["Piratas del Caribe","Indiana Jones","Harry Potter","Superman"],0],
+["¿Quién canta Hips Don't Lie?",["Karol G","Shakira","Rosalía","Thalía"],1],
+["¿Dónde transcurre Stranger Things?",["Hawkins","Springfield","Riverdale","Gotham"],0],
+["¿Quién dirigió Jurassic Park?",["James Cameron","Steven Spielberg","Tim Burton","George Lucas"],1],
+["¿Quién canta Blinding Lights?",["The Weeknd","Drake","Justin Bieber","Bruno Mars"],0],
+["¿Quién interpretó a Hermione Granger?",["Emma Stone","Emma Watson","Anne Hathaway","Keira Knightley"],1],
+["¿Quién es conocido como el Sol de México?",["Chayanne","Luis Miguel","Ricky Martin","Enrique Iglesias"],1],
+["¿Dónde se originó The X Factor?",["Estados Unidos","Reino Unido","España","Australia"],1],
+["¿Qué película de 2023 está basada en la muñeca de Mattel?",["Clueless","Barbie","Enchanted","Mean Girls"],1],
+["¿Quién lanzó el álbum 25?",["Adele","Beyoncé","Rihanna","Alicia Keys"],0]
+];
+let i=0,score=0,answered=false;
+function show(){
+answered=false;
+document.getElementById("count").textContent="Pregunta "+(i+1)+" de "+data.length;
+document.getElementById("question").textContent=data[i][0];
+document.getElementById("feedback").textContent="";
+document.getElementById("next").disabled=true;
+document.getElementById("next").textContent=i===19?"VER RESULTADO":"SIGUIENTE";
+let box=document.getElementById("answers");box.innerHTML="";
+data[i][1].forEach((a,n)=>{
+let b=document.createElement("button");
+b.textContent=String.fromCharCode(65+n)+". "+a;
+b.onclick=()=>choose(n,b);
+box.appendChild(b);
+});
+}
+function choose(n,b){
+if(answered)return;
+answered=true;
+let correct=data[i][2];
+if(n===correct){score++;document.getElementById("feedback").textContent="¡Correcto! Excelente respuesta.";}
+else{document.getElementById("feedback").textContent="Respuesta correcta: "+data[i][1][correct];}
+[...document.getElementById("answers").children].forEach(x=>x.disabled=true);
+document.getElementById("next").disabled=false;
+}
+function next(){
+if(!answered)return;
+if(i<19){i++;show();}
+else{
+document.querySelector(".card").innerHTML="<h2>¡Terminaste!</h2><h1 style='color:#dfbd75'>"+score+"/20</h1><p>Tu resultado en Le Mode Trivia</p><button onclick='location.reload()'>VOLVER A JUGAR</button>";
+}
+}
+show();
+</script>
+</body>
+</html>
