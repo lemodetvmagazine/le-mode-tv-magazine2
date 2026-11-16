@@ -112,7 +112,11 @@ function next(){
 if(!answered)return;
 if(i<19){i++;show();}
 else{
-document.querySelector(".card").innerHTML="<h2>¡Terminaste!</h2><h1 style='color:#dfbd75'>"+score+"/20</h1><p>Tu resultado en Le Mode Trivia</p><button onclick='location.reload()'>VOLVER A JUGAR</button>";
+
+
+document.querySelector(".card").innerHTML = `<h2>¡Terminaste!</h2><h1 style="color:#dfbd75">${score}/20</h1><p>Tu resultado en Le Mode Trivia</p><h2>${score>=16?"¡Excelente! Eres una estrella del entretenimiento.":score>=10?"¡Buen trabajo! Sigue poniendo a prueba tus conocimientos.":"¡Sigue practicando! Puedes volver a intentarlo."}</h2><button onclick="location.reload()">VOLVER A JUGAR</button><button onclick="window.open('https://wa.me/?text='+encodeURIComponent('¡Terminé LE MODE TRIVIA! Mi puntuación fue '+${score}+'/20. ¿Te atreves a jugar? https://lemodetvmagazine.github.io/le-mode-tv-magazine2/trivia/'),'_blank')">COMPARTIR RESULTADO</button>`;
+
+
 }
 }
 show();
