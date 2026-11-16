@@ -67,15 +67,32 @@ b.onclick=()=>choose(n,b);
 box.appendChild(b);
 });
 }
+
 function choose(n,b){
 if(answered)return;
 answered=true;
-let correct=data[i][2];
-if(n===correct){score++;document.getElementById("feedback").textContent="¡Correcto! Excelente respuesta.";}
-else{document.getElementById("feedback").textContent="Respuesta correcta: "+data[i][1][correct];}
-[...document.getElementById("answers").children].forEach(x=>x.disabled=true);
+let correct=Number(data[i][2]);
+let feedback=document.getElementById("feedback");
+
+if(Number(n)===correct){
+score++;
+feedback.textContent="¡CORRECTO! Excelente respuesta.";
+feedback.style.color="#65d68a";
+}else{
+feedback.textContent="INCORRECTO. La respuesta correcta es: "+data[i][1][correct];
+feedback.style.color="#ff7777";
+}
+
+[...document.getElementById("answers").children].forEach((x,j)=>{
+x.disabled=true;
+if(j===correct){
+x.style.border="2px solid #d7b56d";
+}
+});
+
 document.getElementById("next").disabled=false;
 }
+
 function next(){
 if(!answered)return;
 if(i<19){i++;show();}
