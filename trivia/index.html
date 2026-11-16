@@ -116,11 +116,18 @@ document.querySelector(".card").innerHTML="<h2>¡Terminaste!</h2><h1 style='colo
 }
 show();
 
+
 function startGame(){
-document.getElementById("welcome").style.display="none";
-document.getElementById("game").style.display="block";
-show();
+  document.getElementById("welcome").style.display = "none";
+  document.getElementById("game").style.display = "block";
+
+  i = 0;
+  score = 0;
+  answered = false;
+
+  show();
 }
+
 
 </script>
 </body>
