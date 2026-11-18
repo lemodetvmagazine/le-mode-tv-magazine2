@@ -247,5 +247,34 @@ document.getElementById("year").textContent=new Date().getFullYear();
 render();
 if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
 </script>
+
+<script type="module">
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+  const SUPABASE_URL = 'https://rjfudovexcargcrbiqrz.supabase.co';
+
+  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_DdCaLedl4tAsCBTKc2zRjA_iZKRRXE3';
+
+  const supabase = createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+  window.supabaseClient = supabase;
+
+  console.log('Le Mode Rewards: cliente Supabase inicializado.');
+
+  const { data, error } = await supabase
+    .from('rewards')
+    .select('id, name, points')
+    .eq('is_active', true);
+
+  if (error) {
+    console.error('Error al conectar con Supabase:', error.message);
+  } else {
+    console.log('Conexión correcta. Recompensas encontradas:', data);
+  }
+</script>
+
 </body>
 </html>
